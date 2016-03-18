@@ -1,0 +1,9 @@
+# Redefined
+
+Metrics/LineLength:
+  Max: 120
+
+# Disabled
+
+Style/Documentation:
+  Enabled: false
