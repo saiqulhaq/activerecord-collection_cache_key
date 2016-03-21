@@ -2,13 +2,8 @@ language: ruby
 rvm:
   - 2.1
   - 2.2.3
-before_install:
-  - gem install bundler
-install:
-  - bundle install
-  - bundle exec appraisal install
 script:
-  - bundle exec appraisal rake test
+  - bundle exec rake test
 cache:
   - bundler
 gemfile:
