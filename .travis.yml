@@ -14,3 +14,5 @@ gemfile:
   - gemfiles/activerecord40.gemfile
   - gemfiles/activerecord41.gemfile
   - gemfiles/activerecord42.gemfile
+cache:
+  bundler: true
