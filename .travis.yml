@@ -2,10 +2,12 @@ language: ruby
 rvm:
   - 2.1
   - 2.2.3
+before_install:
+  - gem install bundler
 script:
   - bundle exec rake test
 cache:
-  - bundler
+  bundler: true
 gemfile:
   - gemfiles/activerecord30.gemfile
   - gemfiles/activerecord31.gemfile
