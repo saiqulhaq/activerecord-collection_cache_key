@@ -32,7 +32,7 @@ And then use it in your view:
 **Notes on Rails 3.x and `.all`:**
 
 In some versions of Rails covered by this gem, `Model.all` returns an array, and not an instance
-of `ActiveRecord::Relation` in these cases it's possible to access the default key via class method on the model:
+of `ActiveRecord::Relation`. In these cases it's possible to access the default key via class method on the model:
 
 ```ruby
 MyModel.collection_cache_key
