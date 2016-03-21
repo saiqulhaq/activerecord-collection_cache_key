@@ -15,25 +15,27 @@ gem 'activerecord-collection_cache_key'
 
 ## Usage
 
-You can access the key for the default scope of an AR model by calling the bare method:
+You can now access the key for any ActiveRecord collection via its `#cache_key` method:
 
 ```ruby
-@key = MyModel.collection_cache_key
-```
-
-Or the key for a specific query:
-
-```ruby
-@scope = MyModel.where(active: 1).order('updated_at DESC')
-@key = MyModel.collection_cache_key(@scope)
+@scope = MyModel.where(active: 1).cache_key
 ```
 
 And then use it in your view:
 
 ```erb
-<% cache @key do %>
+<% cache @scope do %>
   <% # some code that renders your collection %>
 <% end %>
+```
+
+**Notes on Rails 3.x and `.all`:**
+
+In some versions of Rails covered by this gem, `Model.all` returns an array, and not an instance
+of `ActiveRecord::Relation` in these cases it's possible to access the default key via class method on the model:
+
+```ruby
+MyModel.collection_cache_key
 ```
 
 ## Contributing
