@@ -4,7 +4,7 @@ Bundler.require :development, :test
 require 'active_support'
 require 'active_support/core_ext/string'
 require 'active_support/deprecation'
-require 'collection_cache_key'
+require 'activerecord-collection_cache_key'
 require 'minitest/autorun'
 require 'logger'
 
