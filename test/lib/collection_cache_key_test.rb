@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CollectionCacheKeyTest < TestCase
+class CollectionCacheKeyTest < CollectionCacheKey::TestCase
   subject { TestModel }
   let(:cache_namespace) { subject.to_s.underscore.pluralize }
   let(:original_time) { Time.parse('2010-01-01T00:00:00Z').utc }
@@ -28,11 +28,27 @@ class CollectionCacheKeyTest < TestCase
     end
   end
 
-  describe '#cache_key' do
+  describe '#collection_cache_key' do
     it 'implements a cache key on collections' do
       digest = Digest::MD5.hexdigest(default_sql)
-      subject.cache_key
+      subject.collection_cache_key
              .must_equal("#{cache_namespace}/query-#{digest}-10-#{original_time_str}")
+    end
+
+    it 'updates the cache_key when a record changes' do
+      subject.first.update_attributes(updated_at: update_time)
+      digest = Digest::MD5.hexdigest(default_sql)
+      subject.collection_cache_key
+             .must_equal("#{cache_namespace}/query-#{digest}-10-#{update_time_str}")
+    end
+  end
+
+  describe '#cache_key' do
+    it 'implements a cache_key on relations' do
+      collection = subject.send(:as_default_relation)
+      digest = Digest::MD5.hexdigest(default_sql)
+      collection.cache_key
+                .must_equal("#{cache_namespace}/query-#{digest}-10-#{original_time_str}")
     end
 
     it 'sets the cache key correctly when filtered' do
@@ -47,13 +63,6 @@ class CollectionCacheKeyTest < TestCase
       digest = Digest::MD5.hexdigest(limited_sql)
       collection.cache_key
                 .must_equal("#{cache_namespace}/query-#{digest}-10-#{original_time_str}")
-    end
-
-    it 'updates the cache_key when a record changes' do
-      subject.first.update_attributes(updated_at: update_time)
-      digest = Digest::MD5.hexdigest(default_sql)
-      collection.cache_key
-                .must_equal("#{cache_namespace}/query-#{digest}-10-#{update_time_str}")
     end
   end
 
