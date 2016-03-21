@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Dan Drinkard']
   spec.email         = %w(dan.drinkard@customink.com)
   spec.summary       = 'Rails-5-style ActiveRecord::Relation cache keys for everyone.'
-  spec.description   = 'Make ActiveRecord queries cachable throughout your apps!'
+  spec.description   = 'Make ActiveRecord queries cacheable throughout your apps!'
   spec.homepage      = 'http://github.com/customink/activerecord-collection_cache_key'
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.files         = `git ls-files`.split("\n")
