@@ -4,5 +4,5 @@ pkg
 .swo
 *~
 *.gem
-Gemfile.lock
+/Gemfile.lock
 .bundle
