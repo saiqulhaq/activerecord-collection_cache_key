@@ -2,7 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/repos/56f021bcc7befb007e002f24/badges/ddbc25f40952bed70d65/gpa.svg)](https://codeclimate.com/repos/56f021bcc7befb007e002f24/feed)
 
-This gem is a backport of Rails 5's `Model.collection_cache_key` feature,
+This gem is a backport of Rails 5's [`Model.collection_cache_key` feature](https://github.com/rails/rails/pull/20884),
 allowing smarter, deterministic caching of ActiveRecord relations.
 
 ## Installation
