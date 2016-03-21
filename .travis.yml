@@ -1,0 +1,10 @@
+language: ruby
+cache:
+  - bundler
+gemfile:
+  - gemfiles/activerecord30.gemfile
+  - gemfiles/activerecord31.gemfile
+  - gemfiles/activerecord32.gemfile
+  - gemfiles/activerecord40.gemfile
+  - gemfiles/activerecord41.gemfile
+  - gemfiles/activerecord42.gemfile
