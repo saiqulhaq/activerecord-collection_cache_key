@@ -1,6 +1,6 @@
 # Collection Cache Keys for ActiveRecord 3.0 - 4.2
 
-[![Code Climate](https://codeclimate.com/repos/56f021bcc7befb007e002f24/badges/ddbc25f40952bed70d65/gpa.svg)](https://codeclimate.com/repos/56f021bcc7befb007e002f24/feed)
+[![Code Climate](https://codeclimate.com/repos/56f050f5493ebb008500b6a9/badges/bd915cce171c63066ca3/gpa.svg)](https://codeclimate.com/repos/56f050f5493ebb008500b6a9/feed)
 
 This gem is a backport of Rails 5's [`Relation#cache_key` feature](https://github.com/rails/rails/pull/20884),
 allowing smarter, deterministic caching of ActiveRecord relations.
