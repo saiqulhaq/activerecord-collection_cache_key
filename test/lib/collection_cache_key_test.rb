@@ -35,6 +35,18 @@ class CollectionCacheKeyTest < CollectionCacheKey::TestCase
              .must_equal("#{cache_namespace}/query-#{digest}-10-#{original_time_str}")
     end
 
+    it 'avoids method name collisions with the key generation internals' do
+      subject.class_eval do
+        def size
+          999_999
+        end
+      end
+
+      digest = Digest::MD5.hexdigest(default_sql)
+      subject.collection_cache_key
+             .must_equal("#{cache_namespace}/query-#{digest}-10-#{original_time_str}")
+    end
+
     it 'updates the cache_key when a record changes' do
       subject.first.update_attributes(updated_at: update_time)
       digest = Digest::MD5.hexdigest(default_sql)

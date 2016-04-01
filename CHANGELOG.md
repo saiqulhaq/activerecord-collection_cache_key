@@ -9,3 +9,10 @@ Initial Release
     taken into account in the cache key; this will err toward expiring too much
     rather than too little, and will *always* do a count query regardless of
     whether the relation is loaded or not.
+
+## v0.1.1 - 2016-04-01
+
+Bugfix
+
+* Corrects a bug where models with a `#size` or `#timestamp` method could
+  fail to generate a proper cache key.
