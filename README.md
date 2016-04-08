@@ -21,12 +21,15 @@ You can now access the key for any ActiveRecord collection via its `#cache_key` 
 @scope = MyModel.where(active: 1).cache_key
 ```
 
-And then use it in your view:
+And then use it in your controller:
 
-```erb
-<% cache @scope do %>
-  <% # some code that renders your collection %>
-<% end %>
+```ruby
+def index
+  @scope = MyModel.where(active: 1)
+  Rails.cache.fetch(@scope.cache_key) do
+    respond_with(@scope)
+  end
+end
 ```
 
 **Notes on Rails 3.x and `.all`:**
