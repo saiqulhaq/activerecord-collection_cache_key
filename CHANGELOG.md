@@ -16,3 +16,11 @@ Bugfix
 
 * Corrects a bug where models with a `#size` or `#timestamp` method could
   fail to generate a proper cache key.
+
+## v0.1.2 - 2016-04-26
+
+Bugfix
+
+* Corrects a bug in the PostgreSQL adapter where calling `first` when getting collection stats
+  adds an implicit `order_by` on an unselected column.
+
