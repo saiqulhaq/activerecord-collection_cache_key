@@ -5,4 +5,4 @@ require 'collection_cache_key/relation'
 require 'collection_cache_key/version'
 
 ActiveRecord::Base.extend CollectionCacheKey::CacheKey
-ActiveRecord::Relation.include CollectionCacheKey::Relation
+ActiveRecord::Relation.send(:include, CollectionCacheKey::Relation)
