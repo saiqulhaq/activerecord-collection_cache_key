@@ -24,3 +24,9 @@ Bugfix
 * Corrects a bug in the PostgreSQL adapter where calling `first` when getting collection stats
   adds an implicit `order_by` on an unselected column.
 
+## v0.1.3 - 2016-12-13
+
+Bugfix
+
+* Augments `ActiveRecord::Relation` with `:send` to support Ruby 2.0.0, which
+  marked `.include` as a private module method.
