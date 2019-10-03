@@ -25,9 +25,21 @@ module CollectionCacheKey
       column = "#{connection.quote_table_name(collection.table_name)}.#{connection.quote_column_name(timestamp_column)}"
       query = collection.dup
       result = query.select("COUNT(*) AS size, MAX(#{column}) AS timestamp").to_a.first
-      attrs = result.attributes
+      if result.blank?
+        size = query.size
+        if query.loaded? || query.distinct_value
+          if size.positive?
+            timestamp = query.max_by(&timestamp_column)._read_attribute(timestamp_column)
+          end
+        end
 
-      [query_key(collection), attrs['size'], parsed_timestamp(attrs['timestamp'])]
+        ts = timestamp ? timestamp.utc : Time.zone.now.utc
+        [query_key(collection), size, ts]
+      else
+        attrs = result.attributes
+
+        [query_key(collection), attrs['size'], parsed_timestamp(attrs['timestamp'])]
+      end
     end
 
     def query_key(collection)
