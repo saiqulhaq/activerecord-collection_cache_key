@@ -27,11 +27,11 @@ module CollectionCacheKey
       result = query.select("COUNT(*) AS size, MAX(#{column}) AS timestamp").to_a.first
       if result.blank?
         size = query.size
-        if query.loaded? || query.distinct_value
-          if size.positive?
-            timestamp = query.max_by(&timestamp_column)._read_attribute(timestamp_column)
-          end
-        end
+        timestamp = if query.loaded? || query.distinct_value
+                      if size.positive?
+                        query.max_by(&timestamp_column)._read_attribute(timestamp_column)
+                      end
+                    end
 
         ts = timestamp ? timestamp.utc : Time.zone.now.utc
         [query_key(collection), size, ts]
