@@ -26,12 +26,9 @@ module CollectionCacheKey
       query = collection.dup
       result = query.select("COUNT(*) AS size, MAX(#{column}) AS timestamp").to_a.first
       if result.blank?
-        size = query.size
-        timestamp = if query.loaded? || query.distinct_value
-                      if size.positive?
-                        query.max_by(&timestamp_column)._read_attribute(timestamp_column)
-                      end
-                    end
+        size = collection.size
+        collection.load
+        timestamp = collection.max_by(&timestamp_column)._read_attribute(timestamp_column) if size.positive?
 
         ts = timestamp ? timestamp.utc : Time.zone.now.utc
         [query_key(collection), size, ts]
