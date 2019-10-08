@@ -24,7 +24,7 @@ module CollectionCacheKey
     def details_for(collection, timestamp_column)
       column = "#{connection.quote_table_name(collection.table_name)}.#{connection.quote_column_name(timestamp_column)}"
       query = collection.dup
-      result = query.select("COUNT(*) AS size, MAX(#{column}) AS timestamp").to_a.first
+      result = query.select("COUNT(*) AS size, MAX(#{column}) AS timestamp").to_a.first rescue nil
       if result.blank?
         size = collection.size
         collection.load
